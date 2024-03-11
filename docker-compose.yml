@@ -6,8 +6,9 @@ services:
       - '3000:3000'
     depends_on:
       - db
+      - react-app
     environment:
-      DATABASE_URL: "mongodb://monty:pass@db:27017/mydatabase?authSource=admin&directConnection=true"
+      DATABASE_URL: 'mongodb://monty:pass@db:27017/mydatabase?authSource=admin&directConnection=true'
   db:
     image: prismagraphql/mongo-single-replica:5.0.3
     ports:
@@ -15,3 +16,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: monty
       MONGO_INITDB_ROOT_PASSWORD: pass
+  react-app:
+    build: ../network-social
+    ports:
+      - '80:80'
+      - '8000:8000'
+volumes:
+  react_app: # Объявление именованного тома
